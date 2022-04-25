@@ -1,19 +1,16 @@
 package com.teksystems.capstone.controller;
 
-
 import com.teksystems.capstone.database.dao.OrderDAO;
 import com.teksystems.capstone.database.entity.Order;
 import com.teksystems.capstone.database.entrybeans.OrderEntryBean;
-import com.teksystems.capstone.database.entrybeans.UserEntryBean;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import java.util.List;
+
 
 @Slf4j
 @Controller
@@ -60,8 +57,6 @@ public class OrderController {
         ModelAndView response = new ModelAndView();
 
         List<Order> order = orderDAO.findAll();
-
-
 
 
         response.addObject("order", order);

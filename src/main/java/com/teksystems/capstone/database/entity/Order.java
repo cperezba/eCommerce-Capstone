@@ -19,16 +19,15 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_ID")
+    @Column(name = "id")
     private Integer id;
 
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<OrderDetails> orderDetails;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "user_ID", nullable = true)
+    @JoinColumn(name = "user_id", nullable = true)
     private User user;
-
 
     @Column(name = "sub_total")
     private Float subTotal;
@@ -57,7 +56,6 @@ public class Order {
     @Column(name = "date_created")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated = new Date();
-
 
     @Column(name = "date_modified")
     @Temporal(TemporalType.TIMESTAMP)

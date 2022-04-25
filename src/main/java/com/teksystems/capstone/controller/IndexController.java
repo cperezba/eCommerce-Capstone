@@ -17,27 +17,12 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class IndexController {
 
-    @Autowired
-    private UserDAO userDAO;
-
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public ModelAndView index() throws Exception {
         ModelAndView response = new ModelAndView();
 
-
-        //Zoom:4/12/2022 1:50:00 Retrieving user's name from email(username)
-
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//
-//        if ( authentication.isAuthenticated() ) {
-//            String currentPrincipalName = authentication.getName();
-//            User loggedInUser = userDAO.findByEmail(currentPrincipalName);
-//        }
-//
-//        log.debug(currentPrincipalName);
-
-        response.setViewName("index");
+        response.setViewName("redirect:/home");
         return response;
     }
 }

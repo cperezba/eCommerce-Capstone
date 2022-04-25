@@ -23,12 +23,12 @@
             <input type="hidden" name="id" value="${form.id}" />
             <input name="title" id="title" type="text" value="${form.title}"/>
             <input name="author" id="author" type="text" value="${form.author}"/>
-            <input name="description" id="description" type="text" value="${form.description}"/>
+            <input name="description" id="description" type="textarea" value="${form.description}"/>
             <input name="image" id="image" type="text" value="${form.image}"/>
             <input name="publisher" id="publisher" type="text" value="${form.publisher}"/>
             <input name="isbn10" id="isbn10" type="number" value="${form.isbn10}"/>
             <input name="isbn13" id="isbn13" type="number" value="${form.isbn13}"/>
-            <input name="price" id="price" type="number" value="${form.price}"/>
+            <input name="price" id="price" type="text" value="${form.price}"/>
             <input name="discount" id="discount" type="number" value="${form.discount}"/>
             <input name="status" id="status" type="text" value="${form.status}"/>
             <input name="quantity" id="quantity" type="number" value="${form.quantity}"/>

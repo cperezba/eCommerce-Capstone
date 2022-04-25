@@ -19,4 +19,14 @@ public class LoginController {
         response.setViewName("login/loginForm");
         return response;
     }
+
+    @RequestMapping(value = "login/signup", method = RequestMethod.GET)
+    public ModelAndView signup() throws Exception {
+        ModelAndView response = new ModelAndView();
+
+
+        response.setViewName("login/signup");
+        return response;
+    }
+
 }

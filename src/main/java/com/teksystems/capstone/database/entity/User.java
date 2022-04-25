@@ -58,6 +58,9 @@ public class User {
     @Column(name = "zip_code")
     private Integer zipCode;
 
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Order> orders;
 }
