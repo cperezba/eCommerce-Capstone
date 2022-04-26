@@ -10,10 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Slf4j
@@ -39,14 +43,32 @@ public class UserController {
 //        response.addObject(entry);
 
 
-        response.setViewName("aTestingEntries/user");
+        response.setViewName("alphaTestingEntries/user");
         return response;
     }
 
 
-    @RequestMapping(value = "/user/entrySubmit", method = RequestMethod.POST)
-    public ModelAndView userEntrySubmit(UserEntryBean entry) throws Exception {
+    @RequestMapping(value = "/user/entrySubmit", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView userEntrySubmit(@Valid UserEntryBean entry, BindingResult bindingResult) throws Exception {
         ModelAndView response = new ModelAndView();
+
+        if (bindingResult.hasErrors()) {
+            for (ObjectError error : bindingResult.getAllErrors()) {
+                log.info( ((FieldError)error).getField() + " " +  error.getDefaultMessage());
+            }
+
+            // add the form back to the model so we can fill up the input fields
+            // so the user can correct the input and does not have type it all again
+            response.addObject("entry", entry);
+
+            // add the error list to the model
+            response.addObject("bindingResult", bindingResult);
+
+            // because there is 1 or more error we do not want to process the logic below
+            // that will create a new user in the database.   We want to show the register.jsp
+            response.setViewName("alphaTestingEntries/user");
+            return response;
+        }
 
         User user = new User();
 

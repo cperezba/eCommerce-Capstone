@@ -122,6 +122,18 @@ select {
     margin: 0
 }
 
+.show-password label {
+    font-weight: normal !important;
+}
+
+#password-toggle {
+    display: inline;
+    height: auto !important;
+    width: auto !important;
+}
+
+
+
 /* Cards */
 .card {
     border-radius: 7px;

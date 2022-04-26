@@ -14,7 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import javax.websocket.server.PathParam;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -68,9 +74,36 @@ public class ProductController {
         ModelAndView response = new ModelAndView();
 
         List<Product> products = productDAO.findAll();
-
-
         response.addObject("products", products);
+
+
+
+        try {
+            boolean deletesuccess = (new File("productlog.txt")).delete();
+            if (deletesuccess){
+                log.info("productlog.txt deleted.");
+            }
+            BufferedWriter output = new BufferedWriter(new FileWriter("productlog.txt", true));
+            List<Product> allProducts = productDAO.findAll();
+            output.write("Last updated: "+new Date()+"\n");
+            allProducts.forEach((Product)-> {
+                try {
+                    output.write("ID: "+Product.getId()+" "+Product.getTitle()+" "+Product.getAuthor()+" "+Product.getPrice()+" "+Product.getIsbn10()+"\n");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+            output.flush();
+            output.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            log.error("Product output has failed.");
+        }
+
+
+
+
+
         response.setViewName("/product/all");
         return response;
     }
@@ -106,4 +139,41 @@ public class ProductController {
         return response;
     }
 
+
+//    @RequestMapping(value = "/admin/productlisting/productSubmit", method = {RequestMethod.GET, RequestMethod.POST})
+//    public ModelAndView productSubmit(@Valid ProductEntryBean productEntryBean) throws Exception {
+//        ModelAndView response = new ModelAndView();
+//        response.setViewName("product/all");
+//
+//        response.addObject("productEntryBean", productEntryBean);
+//
+//        Product product = new Product();
+//        productService.getProductDetails( productEntryBean, product);
+//
+//        productDAO.save(product);
+//
+//        try {
+//            boolean deletesuccess = (new File("productlog.txt")).delete();
+//            if (deletesuccess){
+//                log.info("productlog.txt deleted.");
+//            }
+//            BufferedWriter output = new BufferedWriter(new FileWriter("productlog.txt", true));
+//            List<Product> allProducts = productDAO.findAll();
+//            output.write("Last updated: "+new Date()+"\n");
+//            allProducts.forEach((Product)-> {
+//                try {
+//                    output.write("ID: "+Product.getId()+" "+Product.getProductName()+" "+Product.getProductCategory()+" "+Product.getProductPrice()+" "+Product.getCreateDate()+"\n");
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            });
+//            output.flush();
+//            output.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            log.error("Product output has failed.");
+//        }
+//
+//        return new ModelAndView("redirect:/admin/productlisting");
+//    }
 }

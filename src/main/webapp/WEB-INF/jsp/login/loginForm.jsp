@@ -10,15 +10,36 @@
         <form action="/login/loginSubmit" method="post" class="sign-in-sign-up">
             <label for="username">Email: </label>
             <input id="username" name="username" type="text" />
+
             <label for="password">Password: </label>
             <input id="password" name="password" type="password" />
+            <div class="show-password">
+                <input
+                        type="checkbox"
+                        id="password-toggle"
+                        onclick="togglePasswordVisibility()"
+                />
+                <label for="password-toggle">Show Password</label>
+            </div>
 
             <div class="prompt">
                 <button class="btn" type="submit">Submit</button>
-                <p>New Customer? <a href="/login/signup">Sign up</a></p>
+                <p>New Customer? <a href="">Sign up</a></p>
             </div>
         </form>
     </div>
 </section>
+
+
+<script>
+    function togglePasswordVisibility() {
+        var inputElement = document.getElementById("password");
+        if (inputElement.type === "password") {
+            inputElement.type = "text";
+        } else {
+            inputElement.type = "password";
+        }
+    }
+</script>
 
 <jsp:include page="../include/footer.jsp"/>
