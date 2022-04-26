@@ -28,7 +28,7 @@ eCommerce website seeks to provide high-quality homeschooling resources whilst s
 
 Credit goes to TEKsystems and PerScholas for providing instruction and tools for learning Java, Web Development, and Spring MVC. 
 
-Credit also goes to LoremPicsum, Pexels, and Unsplash for their valuable resources.
+Credit also goes to LoremPicsum and Unsplash for their valuable resources.
 
 
 <br/>
